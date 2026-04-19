@@ -1,0 +1,483 @@
+:root {
+    --bg-color: #050505;
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --accent-color: #ff2a85; /* Vibrant Birthday Pink */
+    --accent-hover: #e01b6e; /* Darker Pink */
+    --card-bg: rgba(20, 20, 30, 0.7);
+    --card-border: rgba(255, 42, 133, 0.3); /* Pink border tint */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow: hidden; /* Prevent scrolling for the SPA feel */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background Animation */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1f2937 0%, var(--bg-color) 100%);
+}
+
+.floating-chess {
+    position: absolute;
+    color: rgba(255, 42, 133, 0.2); /* Soft vibrant pink */
+    text-shadow: 0 0 15px rgba(255, 42, 133, 0.4);
+    font-size: 5rem;
+    animation: floatChess 25s infinite linear;
+    user-select: none;
+    pointer-events: none;
+}
+
+.piece-1 { left: 10%; animation-duration: 25s; animation-delay: 0s; font-size: 6rem; }
+.piece-2 { left: 30%; animation-duration: 30s; animation-delay: -5s; font-size: 4rem; }
+.piece-3 { left: 50%; animation-duration: 35s; animation-delay: -15s; font-size: 8rem; }
+.piece-4 { left: 70%; animation-duration: 20s; animation-delay: -10s; font-size: 5rem; }
+.piece-5 { left: 85%; animation-duration: 28s; animation-delay: -2s; font-size: 7rem; }
+.piece-6 { left: 20%; animation-duration: 32s; animation-delay: -20s; font-size: 4.5rem; }
+.piece-7 { left: 60%; animation-duration: 26s; animation-delay: -8s; font-size: 6.5rem; }
+
+@keyframes floatChess {
+    0% { transform: translateY(110vh) rotate(0deg); }
+    100% { transform: translateY(-20vh) rotate(360deg); }
+}
+
+/* Screen Logic */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed to flex-start to prevent top cutoff */
+    overflow-y: auto; /* Allow scrolling if content is taller */
+    overflow-x: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s;
+    padding: 4rem 20px; /* Added padding to give breathing room */
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 800px; /* Widened for 3D carousel */
+    width: 100%;
+    margin: auto 0; /* Centers vertically if smaller than screen */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+    animation: cardEntrance 1s ease-out;
+}
+
+@keyframes cardEntrance {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome Screen */
+#welcome-screen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+#welcome-screen p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--accent-color), #7c3aed);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 42, 133, 0.5);
+}
+
+/* Main Content Screen */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.celebration-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ff2a85, #facc15);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s both;
+}
+
+.highlight-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    color: #facc15;
+    text-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+    display: inline-block;
+    margin-top: 0.5rem;
+    -webkit-text-fill-color: #facc15; /* Overrides the gradient from the parent */
+    animation: glowName 2s infinite alternate;
+}
+
+@keyframes glowName {
+    from { text-shadow: 0 4px 15px rgba(250, 204, 21, 0.4); }
+    to { text-shadow: 0 4px 25px rgba(255, 42, 133, 0.8); }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.quote-container {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 0 12px 12px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.6;
+    animation: fadeIn 1s ease 1s both;
+}
+
+.interactive-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    animation: fadeIn 1s ease 1.5s both;
+}
+
+.special-quote {
+    animation: fadeIn 1s ease both;
+}
+
+.audio-section {
+    margin-top: 1rem;
+    animation: fadeIn 1s ease 2s both;
+}
+
+.music-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+audio {
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    outline: none;
+}
+
+/* Customizing audio player for Webkit browsers (Chrome, Safari, Edge) */
+audio::-webkit-media-controls-panel {
+    background-color: #1e293b;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-timeline {
+    filter: invert(1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3D Carousel */
+.carousel-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 350px; /* Increased for taller portrait items */
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease 0.8s both;
+}
+
+.carousel-3d {
+    width: 180px; /* Portrait width */
+    height: 260px; /* Portrait height */
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCarousel 15s linear infinite;
+    /* Adding cursor to indicate interactability */
+    cursor: pointer;
+}
+
+.carousel-3d.paused {
+    animation-play-state: paused;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 260px;
+    transform-origin: center;
+    /* 360deg / 5 images = 72deg */
+    transform: rotateY(calc(var(--i) * 72deg)) translateZ(220px);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 0.3s, transform 0.3s ease;
+}
+
+.carousel-item:hover {
+    border-color: var(--accent-color);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes rotateCarousel {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 600px;
+    padding: 2rem;
+    animation: popIn 0.5s ease-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+.modal-image-container {
+    width: 100%;
+    height: 350px; /* Fixed height container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the whole image fits perfectly without cropping */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Chess Cinematic Sequence */
+#chess-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chess-sequence.hidden {
+    display: none;
+}
+
+.chess-board-bg {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), 
+        linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
+    background-size: 100px 100px;
+    background-position: 0 0, 50px 50px;
+    opacity: 0;
+    z-index: 1;
+}
+
+#chess-sequence.play-anim .chess-board-bg {
+    animation: boardPan 3s linear forwards;
+}
+
+@keyframes boardPan {
+    0% { transform: scale(1) translateY(0); opacity: 0; }
+    20% { opacity: 0.3; }
+    100% { transform: scale(1.5) translateY(-50px); opacity: 0; }
+}
+
+.chess-piece {
+    font-size: 15rem;
+    color: #ff2a85;
+    text-shadow: 0 0 50px rgba(255, 42, 133, 0.8);
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(5);
+}
+
+#chess-sequence.play-anim .chess-piece {
+    animation: pieceDrop 2s cubic-bezier(0.25, 1, 0.5, 1) 2.5s forwards;
+}
+
+@keyframes pieceDrop {
+    0% { transform: scale(5) translateY(-100px); opacity: 0; }
+    40% { transform: scale(1) translateY(0); opacity: 1; }
+    50% { transform: scale(1) translateY(0); opacity: 1; filter: drop-shadow(0 0 100px #ff2a85); }
+    100% { transform: scale(1) translateY(0); opacity: 0; }
+}
+
+.chess-checkmate {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #ef4444; /* Red */
+    letter-spacing: 10px;
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    font-family: 'Outfit', sans-serif;
+    text-shadow: 4px 4px 0 #000, -1px -1px 0 #fff;
+}
+
+#chess-sequence.play-anim .chess-checkmate {
+    animation: checkmateFlash 1s ease-in-out 4.5s forwards;
+}
+
+@keyframes checkmateFlash {
+    0% { opacity: 0; transform: scale(0.8); }
+    10% { opacity: 1; transform: scale(1.2); }
+    20% { opacity: 0; }
+    30% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5) blur(10px); }
+}
+
+.chess-finale {
+    position: absolute;
+    z-index: 4;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.chess-finale h1 {
+    font-size: 3rem;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+#chess-sequence.play-anim .chess-finale {
+    animation: finaleReveal 2s ease-out 6s forwards;
+}
+
+@keyframes finaleReveal {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .glass-card {
+        padding: 2rem;
+    }
+    
+    .celebration-title {
+        font-size: 2.2rem;
+    }
+    
+    .quote-container {
+        font-size: 1.2rem;
+    }
+}

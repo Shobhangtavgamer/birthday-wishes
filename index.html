@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Dynamic Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-chess piece-1">♞</div>
+        <div class="floating-chess piece-2">♛</div>
+        <div class="floating-chess piece-3">♜</div>
+        <div class="floating-chess piece-4">♝</div>
+        <div class="floating-chess piece-5">♟</div>
+        <div class="floating-chess piece-6">♞</div>
+        <div class="floating-chess piece-7">♚</div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen">
+        <div class="glass-card">
+            <h1>A Special Surprise...</h1>
+            <p>Someone has a message for you.</p>
+            <button id="open-btn" class="primary-btn">Tap to Open</button>
+        </div>
+    </section>
+
+    <!-- Main Content Screen (Hidden Initially) -->
+    <section id="main-screen" class="screen hidden">
+        <div class="glass-card main-content">
+            <h1 class="celebration-title">
+                Happy Birthday, <br>
+                <span class="highlight-name">Dhiresh Margaj</span>! 🎉
+            </h1>
+            
+            <div class="carousel-container">
+                <div class="carousel-3d" id="carousel-spinner">
+                    <div class="carousel-item" style="--i: 1;" data-name="First Metro"><img src="images/first metro.jpeg" alt="First Metro"></div>
+                    <div class="carousel-item" style="--i: 2;" data-name="First Project"><img src="images/first project.jpeg" alt="First Project"></div>
+                    <div class="carousel-item" style="--i: 3;" data-name="First Viva"><img src="images/first viva .jpeg" alt="First Viva"></div>
+                    <div class="carousel-item" style="--i: 4;" data-name="First Year"><img src="images/first year.jpeg" alt="First Year"></div>
+                    <div class="carousel-item" style="--i: 5;" data-name="Malu Bhau"><img src="images/malu bhau.jpeg" alt="Malu Bhau"></div>
+                </div>
+            </div>
+
+            <div class="quote-container">
+                <p class="quote">
+                    "Count your life by smiles, not tears. Count your age by friends, not years. Wishing you the most wonderful birthday and a year full of happiness!"
+                </p>
+            </div>
+
+            <div class="interactive-section cake-section" style="text-align: center; margin-top: 1rem;">
+                <button id="cut-cake-btn" class="primary-btn" style="font-size: 1.5rem; padding: 15px 50px;">Cut the Cake 🎂</button>
+                <div id="cake-quote-reveal" class="hidden" style="margin-top: 2rem;">
+                    <p class="quote special-quote" style="font-size: 1.6rem; color: #fbbf24; font-family: 'Playfair Display', serif; font-style: italic; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);">
+                        "A true friend is like a King on a chessboard—protecting you, guiding you, and always standing by your side until the very end of the game. Happy Birthday, my brother!"
+                    </p>
+                </div>
+            </div>
+
+            <div class="audio-section">
+                <p class="music-label">🎵 Playing your special song...</p>
+                <!-- Replace the src below with your actual birthday song link -->
+                <audio id="bday-audio" controls loop>
+                    <source src="images/Happy_birthday_english(chosic.com).mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <button id="chess-btn" class="primary-btn" style="margin-top: 1rem; background: linear-gradient(135deg, #1e293b, #000); border: 2px solid #fcd34d; color: #fcd34d;">Watch the Chess Legend ♟️</button>
+        </div>
+    </section>
+
+    <!-- Modal for Image Click -->
+    <div id="image-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <div class="modal-image-container">
+                <img id="modal-img" src="" alt="Memory Full">
+            </div>
+            <h2 id="modal-title" class="celebration-title" style="font-size: 2rem; margin-top: 1rem;"></h2>
+            <p class="quote" style="margin-top: 1rem; font-size: 1.2rem;">
+                "Engineering is tough, but surviving it with a friend like you makes the journey unforgettable. From projects to vivas, having you by my side has been the best part of this life."
+            </p>
+        </div>
+    </div>
+
+    <!-- Chess Cinematic Sequence -->
+    <div id="chess-sequence" class="hidden">
+        <div class="chess-board-bg"></div>
+        <div class="chess-piece">♚</div>
+        <div class="chess-checkmate">CHECKMATE.</div>
+        <div class="chess-finale">
+            <h1>The Skiller: <br><span class="highlight-name" style="font-size: 6rem;">Chess King Dhiresh Dada</span></h1>
+            <button id="close-chess-btn" class="primary-btn" style="margin-top: 2rem;">Return to Celebration</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
